@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs')
 // 1-
 
 // function filePath() {
@@ -76,4 +77,22 @@ const path = require('path');
 // resolvePath() // Bnaw3
 
 
+// 9-
+// const joinPath = (...pth) => {
+//     const fullPath = path.join(...pth);
+//     return fullPath;
+// };
 
+// console.log(joinPath("/folder1", "folder2/file.txt"));
+
+// 10
+
+
+// const deleteFile = (pth) => { 
+//     const deletedFile = fs.unlink(pth , (err)=>{ 
+//             if(err) throw err ;
+//             console.log("file deleted successfully"); })
+//         } 
+// console.log(deleteFile("text.txt"));
+
+// 11
