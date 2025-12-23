@@ -74,6 +74,26 @@ if (!currentUser) {
 }
 res.json(currentUser)
 })
+
+// get all users
+app.get("/getAllUsers" ,(req,res) =>{
+    const users = readFile()
+    res.json(users)
+})
+
+// filter users by minimum age
+app.get("/getFilterByMinAge", (req , res) =>{
+    const {minAge} = req.query
+    const users = readFile()
+    const FilterUsers = users.filter(user => minAge <= user.age)
+    if (FilterUsers.length === 0) {
+        return res.json("No user found")
+    }
+    res.json(FilterUsers)
+})
+
+
+
 app.listen(3000 , () =>{
     console.log("server is runnng in port 3000");
 })
