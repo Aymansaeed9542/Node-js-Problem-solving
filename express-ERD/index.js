@@ -44,8 +44,24 @@ app.patch("/updateUser/:id" ,(req,res) =>{
         res.json(users)
         writeFile(users)
     }
+    else{
+        res.json("User is not found")
+    }
 
 
+})
+
+// Delete user by id
+app.delete("/deleteUser/:id" ,(req, res) =>{
+    let users = readFile()
+    const {id} = req.params
+    const userIndex = users.findIndex(user => id == user.id)
+    if (userIndex===-1) {
+        return res.json("User is not found")
+    }
+    users.splice(userIndex,1)
+        writeFile(users)
+    res.json("User deleted successfully")
 })
 
 app.listen(3000 , () =>{
