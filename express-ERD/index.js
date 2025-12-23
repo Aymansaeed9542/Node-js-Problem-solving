@@ -64,6 +64,16 @@ app.delete("/deleteUser/:id" ,(req, res) =>{
     res.json("User deleted successfully")
 })
 
+// get user by name 
+app.get("/getUserByName" , (req, res)=>{
+const {name} = req.query
+const users = readFile()
+const currentUser = users.find(user => name == user.name)
+if (!currentUser) {
+    return res.json("User name is not found")
+}
+res.json(currentUser)
+})
 app.listen(3000 , () =>{
     console.log("server is runnng in port 3000");
 })
