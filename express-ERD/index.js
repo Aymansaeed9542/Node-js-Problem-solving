@@ -44,9 +44,55 @@ app.patch("/updateUser/:id" ,(req,res) =>{
         res.json(users)
         writeFile(users)
     }
+    else{
+        res.json("User is not found")
+    }
 
 
 })
+
+// Delete user by id
+app.delete("/deleteUser/:id" ,(req, res) =>{
+    let users = readFile()
+    const {id} = req.params
+    const userIndex = users.findIndex(user => id == user.id)
+    if (userIndex===-1) {
+        return res.json("User is not found")
+    }
+    users.splice(userIndex,1)
+        writeFile(users)
+    res.json("User deleted successfully")
+})
+
+// get user by name 
+app.get("/getUserByName" , (req, res)=>{
+const {name} = req.query
+const users = readFile()
+const currentUser = users.find(user => name == user.name)
+if (!currentUser) {
+    return res.json("User name is not found")
+}
+res.json(currentUser)
+})
+
+// get all users
+app.get("/getAllUsers" ,(req,res) =>{
+    const users = readFile()
+    res.json(users)
+})
+
+// filter users by minimum age
+app.get("/getFilterByMinAge", (req , res) =>{
+    const {minAge} = req.query
+    const users = readFile()
+    const FilterUsers = users.filter(user => minAge <= user.age)
+    if (FilterUsers.length === 0) {
+        return res.json("No user found")
+    }
+    res.json(FilterUsers)
+})
+
+
 
 app.listen(3000 , () =>{
     console.log("server is runnng in port 3000");
