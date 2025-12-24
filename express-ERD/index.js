@@ -92,6 +92,16 @@ app.get("/getFilterByMinAge", (req , res) =>{
     res.json(FilterUsers)
 })
 
+// get user by id
+app.get("/getUserById/:id" , (req , res) =>{
+    const {id} = req.params
+    const users = readFile()
+    const isExist = users.find(user => id == user.id)
+    if (!isExist) {
+        return res.json("user is not found")
+    }
+    res.json(isExist)
+})
 
 
 app.listen(3000 , () =>{
